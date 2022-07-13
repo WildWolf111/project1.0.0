@@ -17,12 +17,35 @@ export const actions = {
                     commit('loginSuccess', user);
                     router.push('/');
 
-                },
-                error => {
-                    commit('loginFailure', error);
-                    dispatch('notification/error', error, { root: true });
+
                 }
-            );
+            ).catch(err => {
+                if (err.response) {
+                    let message = '';
+                    switch (err.response.data.status_code) {
+                        case 400:
+                            message = 'login or password is invalid';
+                            break;
+
+                        case 400:
+                            message = 'login or password is invalid';
+                            break;
+
+                        default:
+                            message = 'We are so sorry, but authentification server is unreacheable';
+                            break;
+                    }
+
+                    commit('loginFailure', err);
+                    dispatch('notification/error', message, { root: true });
+                    // client received an error response (5xx, 4xx)
+                } else if (err.request) {
+                    // client never received a response, or request never left 
+                } else {
+                    // anything else 
+                }
+
+            });
     },
     // Logout the user
     logout({ commit }) {
@@ -57,7 +80,7 @@ export const mutations = {
         state.user = user;
     },
     loginFailure(state) {
-        state.status = {};
+        state.status = { loggeduser: false };
         state.user = null;
     },
     logout(state) {

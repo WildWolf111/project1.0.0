@@ -1,34 +1,60 @@
 import axios from 'axios'
+import { authHeader } from '../helpers/authservice/auth-header';
 
 
 class WarehouseDataService {
 
-    getAll() {
-        return axios.get('/api/v1/warehouses')
+    getAll(fields, sorts, pages) {
+
+        let dataVals = {
+            fields,
+            pages
+        };
+
+
+        let config = {
+            headers: authHeader(),
+
+        }
+        console.log(dataVals)
+        return axios.post('/api/v3/warehouses/list', config)
     }
 
     get(id) {
-        return axios.get(`/api/v1/warehouses/${id}`);
+        let config = {
+            headers: authHeader()
+        }
+        return axios.get(`/api/v3/warehouses/${id}`, config);
     }
 
     create(data) {
-        return axios.post("/api/v1/warehouses", data);
+        let config = {
+            headers: authHeader()
+        }
+        console.log(config)
+        return axios.post("/api/v3/warehouses", data, config);
     }
 
     update(id, data) {
-        return axios.put(`/api/v1/warehouses/${id}`, data);
+        let config = {
+            headers: authHeader()
+        }
+        return axios.put(`/api/v3/warehouses/${id}`, data, config);
     }
 
-    delete(id) {
-        return axios.delete(`/api/v1/warehouses/${id}`);
+    delete(id, data) {
+        let config = {
+            headers: authHeader()
+        }
+        return axios.delete(`/api/v3/warehouses/delete/${id}`, data, config);
     }
 
     deleteAll() {
-        return axios.delete(`/api/v1/warehouse`);
+        return axios.delete(`/api/v3/warehouses`);
     }
 
-    findByTitle(title) {
-        return axios.get(`/api/v1/warehouse?title=${title}`);
+    findByWarehouseName(name) {
+        return axios.post(`/api/v3/warehouses?name=${name}`);
     }
 }
 

@@ -116,6 +116,7 @@ export default {
   },
   computed: {
     displayedPosts() {
+     
       return this.paginate(this.data);
     },
     resultQuery() {
@@ -231,7 +232,7 @@ export default {
                             }"
                   v-for="(pageNumber, index) in pages.slice(page - 1, page + 5)"
                   :key="index"
-                  @click="page = pageNumber"
+                  @click="setPage(page = pageNumber)"
                 >
                   <a class="page" href="#">{{ pageNumber }}</a>
                 </li>
@@ -239,7 +240,7 @@ export default {
               <a
                 class="page-item pagination-next"
                 href="#"
-                @click="page++"
+                @click="setPage(page++)"
                 v-if="page < pages.length"
               >
                 Next

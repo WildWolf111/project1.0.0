@@ -1328,7 +1328,7 @@ export default {
               <span class="d-flex align-items-center">
                 <img
                   class="rounded-circle header-profile-user"
-                  src="@/assets/images/users/avatar-1.jpg"
+                  src="@/assets/images/users/avatar-11.jpg"
                   alt="Header Avatar"
                 />
                 <span class="text-start ms-xl-2">
@@ -1339,7 +1339,7 @@ export default {
                       fw-medium
                       user-name-text
                     "
-                    >Anna Adame</span
+                    >Yanus</span
                   >
                   <span
                     class="
@@ -1356,7 +1356,7 @@ export default {
             </button>
             <div class="dropdown-menu dropdown-menu-end">
               <!-- item-->
-              <h6 class="dropdown-header">Welcome Anna!</h6>
+              <h6 class="dropdown-header">Welcome Yanus!</h6>
               <router-link class="dropdown-item" to="/pages/profile"
                 ><i
                   class="

@@ -1,7 +1,10 @@
 <script>
-import { required, email, helpers } from "@vuelidate/validators";
+import { required,  helpers } from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import { mapState } from "vuex";
+import RegistrateDataService from "/src/services/RegistrateDataService";
+
+
 
 import {
   authMethods,
@@ -29,8 +32,8 @@ export default {
   data() {
     return {
       user: {
-        username: "",
-        email: "",
+        login: "",
+        role:-1,
         password: "",
       },
       submitted: false,
@@ -42,13 +45,10 @@ export default {
   },
   validations: {
     user: {
-      username: {
-        required: helpers.withMessage("Username is required", required),
+      login: {
+        required: helpers.withMessage("Login is required", required),
       },
-      email: {
-        required: helpers.withMessage("Email is required", required),
-        email: helpers.withMessage("Please enter valid email", email),
-      },
+    
       password: {
         required: helpers.withMessage("Password is required", required),
       },
@@ -64,6 +64,38 @@ export default {
     ...authMethods,
     ...authFackMethods,
     ...notificationMethods,
+    addedUser() {
+      var data = {
+        "login_user":this.user.login,
+        "password_user":this.user.password,
+        
+        
+      };
+       console.log(data);
+      RegistrateDataService.create(data)
+        .then(response => {
+          this.user.id = response.data.id;
+          console.log(response.data);
+            
+            
+            const login = this.user.login;
+              const password =this.user.password;
+            this.loginF({
+              login,
+              password,
+            });
+          this.submitted = true;
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+    
+    newUser() {
+      this.submitted = false;
+      this.user = {};
+    }
+  },
     // Try to register the user in with the email, username
     // and password they provided.
     tryToRegisterIn() {
@@ -74,44 +106,13 @@ export default {
       if (this.v$.$invalid) {
         return;
       } else {
-        if (process.env.VUE_APP_DEFAULT_AUTH === "firebase") {
-          this.tryingToRegister = true;
-          // Reset the regError if it existed.
-          this.regError = null;
-          return (
-            this.register({
-              username: this.user.username,
-              email: this.user.email,
-              password: this.user.password,
-            })
-              // eslint-disable-next-line no-unused-vars
-              .then((token) => {
-                this.tryingToRegister = false;
-                this.isRegisterError = false;
-                this.registerSuccess = true;
-                if (this.registerSuccess) {
-                  this.$router.push(
-                    this.$route.query.redirectFrom || {
-                      name: "default",
-                    }
-                  );
-                }
-              })
-              .catch((error) => {
-                this.tryingToRegister = false;
-                this.regError = error ? error : "";
-                this.isRegisterError = true;
-              })
-          );
-        } else if (process.env.VUE_APP_DEFAULT_AUTH === "fakebackend") {
-          const { email, username, password } = this.user;
-          if (email && username && password) {
-            this.registeruser(this.user);
-          }
-        } 
+        
+     this.user.role=1;
+          console.log(this.user)
+        
       }
     },
-  },
+        
 }
 </script>
 
@@ -178,32 +179,19 @@ export default {
                                             >
                                             {{ notification.message }}
                                             </div>
+                                            
                                             <div class="mb-3">
-                                                <label for="useremail" class="form-label">Email <span class="text-danger">*</span></label>
-                                                <input type="email" class="form-control"  v-model="user.email" id="useremail"
-                                                  :class="{
-                    'is-invalid': submitted && v$.user.email.$error,
-                  }"  placeholder="Enter email address" required>  
-                                               <div
-                  v-for="(item, index) in v$.user.email.$errors"
-                  :key="index"
-                  class="invalid-feedback"
-                >
-                  <span v-if="item.$message">{{ item.$message }}</span>
-                </div>   
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" v-model="user.username" 
+                                                <label for="username" class="form-label">login <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" v-model="user.login" 
                                                 :class="{
-                    'is-invalid': submitted && v$.user.username.$error,
-                  }" id="username" placeholder="Enter username" required>
+                    'is-invalid': submitted && v$.user.login.$error,
+                  }" id="login" placeholder="Enter login" required>
                                                 <div
-                  v-if="submitted && v$.user.username.$error"
+                  v-if="submitted && v$.user.login.$error"
                   class="invalid-feedback"
                 >
-                  <span v-if="v$.user.username.required.$message">{{
-                    v$.user.username.required.$message
+                  <span v-if="v$.user.login.required.$message">{{
+                    v$.user.login.required.$message
                   }}</span>
                 </div>
                                             </div>
@@ -228,7 +216,7 @@ export default {
                                             </div>
                                             
                                             <div class="mt-4">
-                                                <button class="btn btn-success w-100" type="submit">Sign Up</button>
+                                                <button @click="addedUser" class="btn btn-success w-100" type="submit">Sign Up</button>
                                             </div>
 
                                             <div class="mt-4 text-center">

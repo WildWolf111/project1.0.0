@@ -45,7 +45,9 @@ export default {
     ...mapState("authfack", ["status"]),
     notification() {
       return this.$store ? this.$store.state.notification : null;
+     
     },
+    
   },
   methods: {
     ...authFackMethods,
@@ -133,6 +135,7 @@ export default {
                     class="mt-3"
                     dismissible
                     >{{ authError }}</b-alert
+                    
                   >
 
                   <div

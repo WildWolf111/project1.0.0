@@ -9,46 +9,51 @@ export const userService = {
 };
 
 function login(email, password) {
-    var data = {
+
+    //ссылочный тип переменной data//
+    let data = {
         login_user: email,
         password_user: password,
-    };
 
+    };
     console.log(data)
+
 
 
     return axios.post('/api/v2/users/auth', data)
         .then(handleResponse => {
+            console.log(handleResponse)
+            console.log(handleResponse.data.message)
             if (handleResponse.data.message != '') {
                 let responseJson = {
-                    email,
-                    password,
+
+                    login: handleResponse.data.login,
+                    role: handleResponse.data.role,
                     token: handleResponse.data.message,
+
 
 
 
                 };
 
+
                 console.log(responseJson)
                 localStorage.setItem('user', JSON.stringify(responseJson));
+
 
                 return responseJson;
 
             }
 
+
+
+
+
+
+
         });
-    /* .then(user => {
-         console.log('--------')
-         console.log(user)
-             // login successful if there's a jwt token in the response
-         if (result.message) {
 
-             // store user details and jwt token in local storage to keep user logged in between page refreshes
-             localStorage.setItem('user', JSON.stringify(data));
-         }
-         return data;
 
-     });*/
 }
 
 

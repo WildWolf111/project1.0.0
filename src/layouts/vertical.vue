@@ -59,6 +59,7 @@ export default {
 
 <template>
   <div id="layout-wrapper">
+ 
     <NavBar />
     <div>
       <!-- ========== Left Sidebar Start ========== -->
@@ -101,7 +102,7 @@ export default {
       <!-- Vertical Overlay-->
       <div class="vertical-overlay"></div>
     </div>
-    <!-- ============================================================== -->
+   <!-- ============================================================== -->
     <!-- Start Page Content here -->
     <!-- ============================================================== -->
 
@@ -109,7 +110,7 @@ export default {
       <div class="page-content">
         <!-- Start Content-->
         <div class="container-fluid">
-          <slot />
+          <slot></slot>
         </div>
       </div>
       <Footer />

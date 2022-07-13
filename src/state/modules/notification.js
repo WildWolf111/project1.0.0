@@ -9,14 +9,23 @@ export const mutations = {
         state.message = message;
     },
     error(state, message) {
+
         state.type = 'alert-danger';
         state.message = message;
+
     },
     clear(state) {
         state.type = null;
         state.message = null;
-    }
+    },
+
+
 };
+
+
+
+
+
 
 export const actions = {
     success({ commit }, message) {
