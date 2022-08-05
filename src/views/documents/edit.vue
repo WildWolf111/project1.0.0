@@ -408,7 +408,15 @@ console.log('8888888888888888888',this.Document);
          
           this.message = 'The Document was updated successfully!';
         if (response.data.status_code == 200){
+          
+          console.log("*************")
+          console.log(response.data.status_code)
+          console.log(response.data.message)
+          console.log("*************")
+        
         this.$router.push({path: "/documents"})}
+        
+        
         else{
         return response.data.message}
         })

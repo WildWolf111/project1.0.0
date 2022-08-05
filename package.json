@@ -63,6 +63,7 @@
         "vue-prismjs": "^1.2.0",
         "vue-repeater": "^1.1.2",
         "vue-router": "4",
+        "vue-translit": "^0.0.1",
         "vue3-apexcharts": "^1.4.1",
         "vue3-count-to": "^1.1.2",
         "vue3-echarts": "^1.0.4",

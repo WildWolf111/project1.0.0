@@ -41,13 +41,13 @@ class DocumentsDataService {
         console.log(data)
 
 
-        return axios.post(`/api/v3/documents`, data);
+        return axios.post(`/api/v3/documents`, data, config);
     }
 
     update(id, data) {
         console.log(data)
         console.log(`/api/v3/documents/${id}`)
-        return axios.put(`/api/v3/documents/${id}`, data);
+        return axios.put(`/api/v3/documents/${id}`, data, config);
 
     }
 
@@ -61,7 +61,7 @@ class DocumentsDataService {
     }
 
     findByBrandName(name) {
-        return axios.post(`/api/v3/documents?name=${name}`);
+        return axios.post(`/api/v3/documents?name=${name}`, config);
     }
 
     holddocument(id) {

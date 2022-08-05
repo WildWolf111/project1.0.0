@@ -54,7 +54,7 @@ class WarehouseDataService {
     }
 
     findByWarehouseName(name) {
-        return axios.post(`/api/v3/warehouses?name=${name}`);
+        return axios.post(`/api/v3/warehouses?name=${name}`, config);
     }
 }
 

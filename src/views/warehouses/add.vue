@@ -17,6 +17,7 @@ export default {
         Id: '',
         Name:"",
         Slug:"",
+        
         },
 
        
@@ -28,6 +29,42 @@ export default {
     PageHeader,
   },
     methods: {
+        
+    translit(word){
+      var answer = '';
+      var converter = {
+        'а': 'a',    'б': 'b',    'в': 'v',    'г': 'g',    'д': 'd',
+        'е': 'e',    'ё': 'e',    'ж': 'zh',   'з': 'z',    'и': 'i',
+        'й': 'y',    'к': 'k',    'л': 'l',    'м': 'm',    'н': 'n',
+        'о': 'o',    'п': 'p',    'р': 'r',    'с': 's',    'т': 't',
+        'у': 'u',    'ф': 'f',    'х': 'h',    'ц': 'c',    'ч': 'ch',
+        'ш': 'sh',   'щ': 'sch',  'ь': '',     'ы': 'y',    'ъ': '',
+        'э': 'e',    'ю': 'yu',   'я': 'ya',
+    
+        'А': 'A',    'Б': 'B',    'В': 'V',    'Г': 'G',    'Д': 'D',
+        'Е': 'E',    'Ё': 'E',    'Ж': 'Zh',   'З': 'Z',    'И': 'I',
+        'Й': 'Y',    'К': 'K',    'Л': 'L',    'М': 'M',    'Н': 'N',
+        'О': 'O',    'П': 'P',    'Р': 'R',    'С': 'S',    'Т': 'T',
+        'У': 'U',    'Ф': 'F',    'Х': 'H',    'Ц': 'C',    'Ч': 'Ch',
+        'Ш': 'Sh',   'Щ': 'Sch',  'Ь': '',     'Ы': 'Y',    'Ъ': '',
+        'Э': 'E',    'Ю': 'Yu',   'Я': 'Ya',   ' ': '-'
+      };
+    
+      for (var i = 0; i < word.length; ++i ) {
+        if (converter[word[i]] == undefined){
+          answer += word[i];
+        } else {
+          answer += converter[word[i]];
+        }
+      }
+    
+      return answer;
+    },
+     Transliteration(){
+       
+        this.Warehouse.Slug = this.translit(this.Warehouse.Name);
+
+      },
     addedWarehouse() {
          
       var data = {
@@ -61,8 +98,9 @@ export default {
       this.submitted = false;
       this.Warehouses = {};
     }
-  }
-    
+  },
+  
+ 
 };
 </script>
 
@@ -73,7 +111,7 @@ export default {
      <div class="row">
           <div>
               <label for="labelInput" class="form-label">{{ $t("t-name") }}</label>
-             <input type="Text" class="form-control" id="labelInput" required v-model="Warehouse.Name" >
+             <input type="Text" class="form-control" id="labelInput" required v-model="Warehouse.Name"  @keyup="Transliteration" >
           </div>                     
      </div> 
 
@@ -81,6 +119,7 @@ export default {
           <div>
               <label for="labelInput" class="form-label">   {{ $t("t-slug") }}</label>
               <input type="Text" class="form-control" id="labelInput" required v-model="Warehouse.Slug" >
+              
           </div>                     
      </div>
 
@@ -94,7 +133,8 @@ export default {
         <b-button @click="addedWarehouse" variant="success" class="waves-effect waves-light" key="enter">{{ $t("t-Added") }}</b-button>       
         </div>             
      </div>
-      
+    
+    
 
 
 

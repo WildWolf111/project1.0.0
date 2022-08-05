@@ -54,7 +54,7 @@ class GTDDataService {
     }
 
     deleteAll() {
-        return axios.post(`/api/v3/GTD`);
+        return axios.post(`/api/v3/GTD`, config);
     }
 
     findByGTDName(name) {

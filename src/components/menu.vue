@@ -178,7 +178,7 @@ export default {
   <div class="container-fluid">
     <div id="two-column-menu"></div>
     
-     <template  v-if="user.role === 1">
+     <template  v-if="user.role.id === 1">
         <ul class="navbar-nav h-100" id="navbar-nav">
         <li class="menu-title">
           <span data-key="t-menu"> {{ $t("t-menu") }}</span>
@@ -186,7 +186,7 @@ export default {
 
 
 
-        <!--  -->
+        <!-- Warehouse -->
         <li class="nav-item">
           <a
             class="nav-link menu-link"
@@ -203,7 +203,35 @@ export default {
             <ul class="nav nav-sm flex-column">
 
 
-                <!--warehouses_cells-->
+              
+
+
+
+
+               <li class="nav-item">
+                <router-link
+                  to="/warehouses/add"
+                  class="nav-link custom-abc"
+                  data-key="t-analytics"
+                >
+                  {{ $t("t-add") }}
+                </router-link>
+              </li>
+              
+              <li class="nav-item">
+                <router-link
+                  to="/warehouses"
+                  class="nav-link custom-abc"
+                  data-key="t-analytics"
+                >
+                  {{ $t("t-list") }}
+                </router-link>
+              </li>
+             
+            </ul>
+          </div>
+        </li>
+          <!--warehouses_cells-->
                   <li class="nav-item">
                <a
                     class="nav-link menu-link"
@@ -240,75 +268,8 @@ export default {
               </ul>
           </div>
         </li>
-
-
-
-
-               <li class="nav-item">
-                <router-link
-                  to="/warehouses/add"
-                  class="nav-link custom-abc"
-                  data-key="t-analytics"
-                >
-                  {{ $t("t-add") }}
-                </router-link>
-              </li>
-              
-              <li class="nav-item">
-                <router-link
-                  to="/warehouses"
-                  class="nav-link custom-abc"
-                  data-key="t-analytics"
-                >
-                  {{ $t("t-list") }}
-                </router-link>
-              </li>
-             
-            </ul>
-          </div>
-        </li>
         
-        <!-- companies -->
-        <li class="nav-item">
-          <a
-            class="nav-link menu-link"
-            href="#sidebarCompanies"
-            data-bs-toggle="collapse"
-            role="button"
-            aria-expanded="false"
-            aria-controls="sidebarCompanies"
-          >
-             <HomeIcon></HomeIcon>
-            <span data-key="t-companies"> {{ $t("t-companies") }}</span>
-          </a>
-          <div class="collapse menu-dropdown" id="sidebarCompanies">
-            <ul class="nav nav-sm flex-column">
-               <li class="nav-item">
-                <router-link
-                  to="/companies/add"
-                  class="nav-link custom-abc"
-                  data-key="t-analytics"
-                >
-                  {{ $t("t-add") }}
-                </router-link>
-              </li>
-              
-              <li class="nav-item">
-                <router-link
-                  to="/companies"
-                  class="nav-link custom-abc"
-                  data-key="t-analytics"
-                >
-                  {{ $t("t-list") }}
-                </router-link>
-              </li>
-             
-
-
-             
-            </ul>
-          </div>
-        </li>
+       
 
 
         
@@ -623,6 +584,310 @@ export default {
           <div class="collapse menu-dropdown" id="sidebarRoleManagment">
             <ul class="nav nav-sm flex-column">
               
+               
+              
+              <li class="nav-item">
+                <router-link
+                  to="/roles"
+                  class="nav-link custom-abc"
+                  data-key="t-analytics"
+                >
+                  {{ $t("t-list") }}
+                </router-link>
+              </li>
+             
+
+
+             
+            </ul>
+          </div>
+        </li>
+        <!-- -->
+
+        <!-- -->
+
+        </ul>
+    </template>
+
+     <template  v-if="user.role.id === 2">
+        <ul class="navbar-nav h-100" id="navbar-nav">
+        <li class="menu-title">
+          <span data-key="t-menu"> {{ $t("t-menu") }}</span>
+        </li>
+
+
+
+       
+
+        
+        <!--documents-->
+        <li class="nav-item">
+          <a
+            class="nav-link menu-link"
+            href="#sidebarDocuments"
+            data-bs-toggle="collapse"
+            role="button"
+            aria-expanded="false"
+            aria-controls="sidebarDocuments"
+          >
+             <FileTextIcon></FileTextIcon>
+            <span data-key="t-documents"> {{ $t("t-documents") }}</span>
+          </a>
+          <div class="collapse menu-dropdown" id="sidebarDocuments">
+            <ul class="nav nav-sm flex-column">
+               
+                <li class="nav-item">
+                          <router-link
+                            to="/documents/add"
+                            class="nav-link custom-abc"
+                            data-key="t-analytics"
+                          >
+                            {{ $t("t-add") }}
+                          </router-link>
+                        </li>
+
+                      <li class="nav-item">
+                          <router-link
+                            to="/documents"
+                            class="nav-link custom-abc"
+                            data-key="t-analytics"
+                          >
+                            {{ $t("t-list") }}
+                          </router-link>
+                        </li>
+
+
+
+            
+
+               
+
+             
+            </ul>
+          </div>
+        </li>
+        
+           <!--products-->
+        <li class="nav-item">
+          <a
+            class="nav-link menu-link"
+            href="#sidebarProducts"
+            data-bs-toggle="collapse"
+            role="button"
+            aria-expanded="false"
+            aria-controls="sidebarProducts"
+          >
+              <i class="ri-function-line"></i>
+            <span data-key="t-products"> {{ $t("t-products") }}</span>
+          </a>
+          <div class="collapse menu-dropdown" id="sidebarProducts">
+            <ul class="nav nav-sm flex-column">
+              
+              <!--brands-->
+                 <li class="nav-item">
+               <a
+                    class="nav-link menu-link"
+                    href="#sidebarBrand"
+                    data-bs-toggle="collapse"
+                    role="button"
+                    aria-expanded="false"
+                    aria-controls="sidebarBrand"
+                  >
+                      
+                    <span data-key="t-brand"> {{ $t("t-brands") }}</span>
+                  </a>
+                  <div class="collapse menu-dropdown" id="sidebarBrand">
+                    <ul class="nav nav-sm flex-column">
+                     
+                      <li class="nav-item">
+                          <router-link
+                            to="/brands/add"
+                            class="nav-link custom-abc"
+                            data-key="t-analytics"
+                          >
+                            {{ $t("t-add") }}
+                          </router-link>
+                        </li>
+
+                      <li class="nav-item">
+                          <router-link
+                            to="/brands"
+                            class="nav-link custom-abc"
+                            data-key="t-analytics"
+                          >
+                            {{ $t("t-list") }}
+                          </router-link>
+                        </li>
+                        
+                       
+
+                       
+
+
+                    </ul>
+                  </div>
+                      </li>
+
+                      <!--Products-->
+            <li class="nav-item">
+               <a
+                    class="nav-link menu-link"
+                    href="#sidebarproducts"
+                    data-bs-toggle="collapse"
+                    role="button"
+                    aria-expanded="false"
+                    aria-controls="sidebarproducts"
+                  >
+                      
+                    <span data-key="t-products"> {{ $t("t-products") }}</span>
+                  </a>
+                  <div class="collapse menu-dropdown" id="sidebarproducts">
+                    <ul class="nav nav-sm flex-column">
+                      <li class="nav-item">
+                          <router-link
+                            to="/products/add"
+                            class="nav-link custom-abc"
+                            data-key="t-analytics"
+                          >
+                            {{ $t("t-add") }}
+                          </router-link>
+                        </li>
+
+                      <li class="nav-item">
+                          <router-link
+                            to="/products"
+                            class="nav-link custom-abc"
+                            data-key="t-analytics"
+                          >
+                            {{ $t("t-list") }}
+                          </router-link>
+                        </li>
+
+                    
+                       
+
+
+                    </ul>
+                  </div>
+                      </li>
+
+              <!-- categories -->
+            <li class="nav-item">
+               <a
+                    class="nav-link menu-link"
+                    href="#sidebarCategories"
+                    data-bs-toggle="collapse"
+                    role="button"
+                    aria-expanded="false"
+                    aria-controls="sidebarCategories"
+                  >
+                      
+                    <span data-key="t-products"> {{ $t("t-categories") }}</span>
+                  </a>
+                  <div class="collapse menu-dropdown" id="sidebarCategories">
+                    <ul class="nav nav-sm flex-column">
+                      <li class="nav-item">
+                          <router-link
+                            to="/categories/add"
+                            class="nav-link custom-abc"
+                            data-key="t-analytics"
+                          >
+                            {{ $t("t-add") }}
+                          </router-link>
+                        </li>
+
+                      <li class="nav-item">
+                          <router-link
+                            to="/categories"
+                            class="nav-link custom-abc"
+                            data-key="t-analytics"
+                          >
+                            {{ $t("t-list") }}
+                          </router-link>
+                        </li>
+
+                    
+                       
+
+
+                    </ul>
+                  </div>
+                      </li>
+            
+            
+            
+            
+            </ul>
+          </div>
+        </li>
+          
+
+
+
+
+
+
+
+
+                <!--countries-->
+        <li class="nav-item">
+          <a
+            class="nav-link menu-link"
+            href="#sidebarCountries"
+            data-bs-toggle="collapse"
+            role="button"
+            aria-expanded="false"
+            aria-controls="sidebarCountries"
+          >
+            <i class="ri-earth-fill"></i>
+            <span data-key="t-countries"> {{ $t("t-countries") }}</span>
+          </a>
+          <div class="collapse menu-dropdown" id="sidebarCountries">
+            <ul class="nav nav-sm flex-column">
+              
+               <li class="nav-item">
+                <router-link
+                  to="/countries/add"
+                  class="nav-link custom-abc"
+                  data-key="t-analytics"
+                >
+                  {{ $t("t-countries-add") }}
+                </router-link>
+              </li>
+              
+              <li class="nav-item">
+                <router-link
+                  to="/countries"
+                  class="nav-link custom-abc"
+                  data-key="t-analytics"
+                >
+                  {{ $t("t-countries-list") }}
+                </router-link>
+              </li>
+             
+
+
+             
+            </ul>
+          </div>
+        </li>
+        
+        <!-- GTD-->
+<li class="nav-item">
+          <a
+            class="nav-link menu-link"
+            href="#sidebarGTDs"
+            data-bs-toggle="collapse"
+            role="button"
+            aria-expanded="false"
+            aria-controls="sidebarGTDs"
+          >
+            <i class="ri-earth-fill"></i>
+            <span data-key="t-countries"> {{ $t("t-GTDs") }}</span>
+          </a>
+          <div class="collapse menu-dropdown" id="sidebarGTDs">
+            <ul class="nav nav-sm flex-column">
+              
                <li class="nav-item">
                 <router-link
                   to="/gtds/add"
@@ -649,14 +914,14 @@ export default {
             </ul>
           </div>
         </li>
+        
+       
         <!-- -->
 
         <!-- -->
 
         </ul>
     </template>
-
-
 
 
 

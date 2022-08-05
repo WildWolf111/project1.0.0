@@ -28,6 +28,8 @@ export default {
     PageHeader,
   },
     methods: {
+
+      
     addedCountry() {
         
       var data = {

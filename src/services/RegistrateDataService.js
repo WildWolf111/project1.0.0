@@ -6,7 +6,11 @@ class RegistrateDataService {
 
 
     create(data) {
-        return axios.post("/api/v2/users/registrate", data);
+        console.log("---------------------")
+        console.log(data)
+        console.log("---------------------")
+        return axios.post("/api/v2/users/register", data);
+
     }
 
 

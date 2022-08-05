@@ -24,7 +24,7 @@ class CountryDataService {
 
 
     get(id) {
-        return axios.post(`/api/v2/product/get/${id}`);
+        return axios.post(`/api/v2/product/get/${id}`, config);
     }
 
     create(data) {
@@ -54,7 +54,7 @@ class CountryDataService {
     }
 
     findByProductName(name) {
-        return axios.post(`/api/v2/products?name=${name}`);
+        return axios.post(`/api/v2/products?name=${name}`, config);
     }
 }
 

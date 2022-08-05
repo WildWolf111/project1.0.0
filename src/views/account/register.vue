@@ -1,5 +1,5 @@
 <script>
-import { required,  helpers } from "@vuelidate/validators";
+import { required,  helpers, email, minLength, sameAs,  } from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import { mapState } from "vuex";
 import RegistrateDataService from "/src/services/RegistrateDataService";
@@ -13,6 +13,7 @@ import {
 } from "@/state/helpers";
 
 import appConfig from "../../../app.config";
+import mailboxVue from "../apps/mailbox.vue";
 
 export default {
     setup() {
@@ -35,6 +36,11 @@ export default {
         login: "",
         role:-1,
         password: "",
+        name: "",
+        surname:"",
+        middlename: "",
+        email:"",
+        password_check:""
       },
       submitted: false,
       regError: null,
@@ -48,10 +54,20 @@ export default {
       login: {
         required: helpers.withMessage("Login is required", required),
       },
-    
       password: {
         required: helpers.withMessage("Password is required", required),
+        minLength: minLength(8)
       },
+      
+        name: {
+          
+        },
+        surname: {
+        
+        },
+        email: {
+          required: helpers.withMessage("Email is required", required, email),
+        },
     },
   },
   computed: {
@@ -64,11 +80,22 @@ export default {
     ...authMethods,
     ...authFackMethods,
     ...notificationMethods,
+      
+      
     addedUser() {
+       this.submitted = true;
+      this.v$.$touch();
+
+      if (this.v$.$invalid) {
+        return;
+      }else{
       var data = {
-        "login_user":this.user.login,
-        "password_user":this.user.password,
-        
+        "login":this.user.login,
+        "password":this.user.password,
+        "name":this.user.name,
+        "midlenmae":this.user.middlename,
+        "surname":this.user.surname,
+        "email":this.user.email,
         
       };
        console.log(data);
@@ -82,13 +109,14 @@ export default {
               const password =this.user.password;
             this.loginF({
               login,
-              password,
+             password,
             });
           this.submitted = true;
         })
         .catch(e => {
           console.log(e);
         });
+      }
     },
     
     newUser() {
@@ -107,13 +135,17 @@ export default {
         return;
       } else {
         
-     this.user.role=1;
+     this.user.role=6;
           console.log(this.user)
         
       }
     },
-        
-}
+    
+       mounted() {
+   console.log(this.v$);
+  }, 
+       } 
+
 </script>
 
 <template>
@@ -135,12 +167,7 @@ export default {
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="text-center mt-sm-5 mb-4 text-white-50">
-                                <div>
-                                    <router-link to="/" class="d-inline-block auth-logo">
-                                        <img src="@/assets/images/logo-light.png" alt="" height="20">
-                                    </router-link>
-                                </div>
-                                <p class="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p>
+                              
                             </div>
                         </div>
                     </div>
@@ -152,11 +179,10 @@ export default {
                             
                                 <div class="card-body p-4"> 
                                     <div class="text-center mt-2">
-                                        <h5 class="text-primary">Create New Account</h5>
-                                        <p class="text-muted">Get your free velzon account now</p>
+                                        <h5 class="text-primary">Создайте новый аккаунт</h5>
                                     </div>
                                     <div class="p-2 mt-4">
-                                        <form class="needs-validation" @submit.prevent="tryToRegisterIn">
+                                        <form class="needs-validation" @submit.prevent="addedUser">
                                             <b-alert
                                             v-model="registerSuccess"
                                             class="mt-3"
@@ -180,6 +206,10 @@ export default {
                                             {{ notification.message }}
                                             </div>
                                             
+                                            
+
+
+
                                             <div class="mb-3">
                                                 <label for="username" class="form-label">login <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" v-model="user.login" 
@@ -195,8 +225,24 @@ export default {
                   }}</span>
                 </div>
                                             </div>
-                                            
-                                            <div class="mb-2">
+                                      
+                                       <div class="mb-3">
+                                                <label for="useremail" class="form-label">Email <span class="text-danger">*</span></label>
+                                                <input type="email" class="form-control"  v-model="user.email" id="useremail"
+                                                  :class="{
+                    'is-invalid': submitted && v$.user.email.$error,
+                  }"  placeholder="Enter email address" required>  
+                                               <div
+                  v-for="(item, index) in v$.user.email.$errors"
+                  :key="index"
+                  class="invalid-feedback"
+                >
+                  <span v-if="item.$message">{{ item.$message }}</span>
+                </div>   
+                                            </div>
+
+
+                           <div class="mb-2">
                                                 <label for="userpassword" class="form-label">Password <span class="text-danger">*</span></label>
                                                 <input type="password" class="form-control"   v-model="user.password"  :class="{
                     'is-invalid': submitted && v$.user.password.$error,
@@ -210,13 +256,36 @@ export default {
                   }}</span>
                 </div>    
                                             </div>
+                                                      
+                          
+                          
+                          
+                          <div class="mb-2">
+                              <label for="text" class="form-label">{{"t-Name"}} <span class="text-danger">*</span></label>
+                              <input type="text" class="form-control"   v-model="user.name" placeholder="Enter Name" >
+                          </div>
+
+                          <div class="mb-2">
+                              <label for="text" class="form-label">{{"t-MiddleName"}} <span class="text-danger">*</span></label>
+                              <input type="text" class="form-control"   v-model="user.midlename" placeholder="Enter MiddleName" >
+                          </div>
+
+                           <div class="mb-2">
+                              <label for="text" class="form-label">{{"t-SurName"}} <span class="text-danger">*</span></label>
+                              <input type="text" class="form-control"   v-model="user.surname" placeholder="Enter SurName" >
+                          </div>
+
+                          
+
+
+
 
                                             <div class="mb-4">
                                                 <p class="mb-0 fs-12 text-muted fst-italic">By registering you agree to the Velzon <a href="#" class="text-primary text-decoration-underline fst-normal fw-medium">Terms of Use</a></p>
                                             </div>
                                             
                                             <div class="mt-4">
-                                                <button @click="addedUser" class="btn btn-success w-100" type="submit">Sign Up</button>
+                                                <button  class="btn btn-success w-100" type="submit">Sign Up</button>
                                             </div>
 
                                             <div class="mt-4 text-center">

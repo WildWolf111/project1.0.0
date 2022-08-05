@@ -51,7 +51,7 @@ class Warehouse_cellDataService {
     }
 
     deleteAll() {
-        return axios.post(`/api/v3/warehouses_cells`);
+        return axios.post(`/api/v3/warehouses_cells`, config);
     }
 
     findByWarehouse_cellName(name) {

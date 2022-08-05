@@ -1423,6 +1423,20 @@ export default [{
         component: () =>
             import ("../views/GTDs/add"),
     },
+    //RoleManagment
+    {
+        path: "/roles",
+        name: "Roles List",
+        meta: { title: "Progress", authRequired: true },
+        component: () =>
+            import ("../views/rolemanagment/list"),
 
-
+    },
+    {
+        path: "/role/:id",
+        name: "RolesEdit",
+        meta: { title: "Progress", authRequired: true },
+        component: () =>
+            import ("../views/rolemanagment/edit"),
+    },
 ];

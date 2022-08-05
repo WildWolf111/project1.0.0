@@ -176,7 +176,7 @@ export default {
 
 <div class="col-xxl-3 col-md-6">
     <label for="exampleDataList" class="form-label">{{ $t("t-countries") }}</label>
-    <Select2 v-model="currentGTD.Country.id" :options="this.Countries" @select="mySelectEvent($event)"/>
+    <Select2 v-model.number="currentGTD.Country.id" :options="this.Countries" @select="mySelectEvent($event)"/>
 </div>
 
       

@@ -12,8 +12,11 @@ function login(email, password) {
 
     //ссылочный тип переменной data//
     let data = {
-        login_user: email,
-        password_user: password,
+        login: email,
+        password: password,
+
+
+
 
     };
     console.log(data)
@@ -27,9 +30,9 @@ function login(email, password) {
             if (handleResponse.data.message != '') {
                 let responseJson = {
 
-                    login: handleResponse.data.login,
-                    role: handleResponse.data.role,
-                    token: handleResponse.data.message,
+                    login: handleResponse.data.User.login,
+                    role: handleResponse.data.User.Role,
+                    token: handleResponse.data.Token,
 
 
 
