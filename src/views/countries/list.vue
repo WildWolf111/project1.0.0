@@ -80,7 +80,7 @@ export default {
 
        CountryDataService.getAll(this.jsonFields,[],this.jsonPages)
         .then(response => {
-         console.log(response.data.List)
+       
           this.Countries = response.data.List;
            
           this.perPage = response.data.pg_length;
@@ -199,7 +199,7 @@ export default {
             
             <td>
                 <div class="hstack gap-3 flex-wrap">
-                   <router-link :to="{name: 'CountriesEdit', params: { id: Country.id }}"> <a href="javascript:void(0);" class="link-primary fs-15"><i class="ri-edit-2-line"></i></a></router-link>
+                   <a @click="edit(item.id)">edit</a>
                     <a href="javascript:void(0);" class="link-success fs-15"><i class="ri-delete-bin-line" @click="deleteCountry(Country.id)"></i></a>
                 </div>
             </td>

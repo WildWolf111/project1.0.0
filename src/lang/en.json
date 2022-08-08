@@ -180,9 +180,9 @@
     "t-PriceContDelete": "Price",
     "t-TransferRollback": "Transfer",
 
-    "t-countries": "Supplier countries",
-    "t-countries-add": "Add supplier countries",
-    "t-countries-list": "List of supplier countries",
+    "t-countries": "Countries",
+    "t-countries-add": "Add country",
+    "t-countries-list": "List of countries",
 
     "t-products-add": "Add products",
     "t-products-list": "Products list",
