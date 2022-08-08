@@ -1341,7 +1341,7 @@ export default [{
         name: "Countries List",
         meta: { title: "Progress", authRequired: true },
         component: () =>
-            import ("../views/countries-test/index"),
+            import ("../views/countries/list"),
 
     },
     {
