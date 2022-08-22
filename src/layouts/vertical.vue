@@ -21,11 +21,7 @@ export default {
   computed: {
     ...layoutComputed,
   },
-  created: () => {
-    document.body.removeAttribute("data-layout", "horizontal");
-    document.body.removeAttribute("data-topbar", "dark");
-    document.body.removeAttribute("data-layout-size", "boxed");
-  },
+
   methods: {
     toggleMenu() {
       document.body.classList.toggle("sidebar-enable");

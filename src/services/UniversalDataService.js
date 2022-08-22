@@ -6,7 +6,7 @@ import { authHeader } from '../helpers/authservice/auth-header';
 // eslint-disable-next-line no-unused-vars
 class UniversalDataService {
 
-    path = '/api/v3'
+    path = '/api/v2/data'
     mpath = '';
     setPath(pth) {
         this.mpath = this.path + '/' + pth;
@@ -16,8 +16,12 @@ class UniversalDataService {
         let config = {
             headers: authHeader(),
             body: params
+
         }
+        console.log("---------------------")
+        console.log(config)
         return axios.post(this.mpath, config)
+
     }
     create(id, params) {
         let config = {

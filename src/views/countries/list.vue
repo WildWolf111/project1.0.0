@@ -16,7 +16,8 @@
         },
         data() {
             return {
-                type:'countries/list',
+                type_list:'countries/list',//(это часть URL)
+                main_type:'countries',//(это часть URL)
                 list_items:[],
                 title: "Сountries",
                 items: [
@@ -39,13 +40,13 @@
 
             list(){
 
-                UniversalDataService.setPath(this.type);
+                UniversalDataService.setPath(this.type_list);
                 UniversalDataService.list([])
                     .then(response => {
 
                         //dispatch('notification/success', 'Получение списка прошло успешно', { root: true });
                         this.list_items = response.data.List;
-                        console.log(response.data.List)
+                        
                     })
                     .catch(error => {
                         //dispatch('notification/error', error, { root: true });
@@ -55,7 +56,7 @@
 
             },
             remove(id){
-                UniversalDataService.setPath(this.type);
+                UniversalDataService.setPath(this.main_type);
                 UniversalDataService.delete(id)
                     .then(() => {
                         //dispatch('notification/success', 'Удаление прошло успешно', { root: true });
@@ -68,7 +69,7 @@
 
             },
             edit(id){
-                router.push('/'+this.type+'/'+id);
+                router.push('/'+this.main_type+'/'+id);
 
             }
 
@@ -111,7 +112,7 @@
                                         <td>{{item.code}}</td>
 
                                         <td>
-                                            <div>
+                                            <div class="hstack gap-3 flex-wrap">
                                                 <a @click="edit(item.id)" href="javascript:void(0);" class="link-primary fs-15"><i class="ri-edit-2-line"></i></a> 
                                        
                                                 <a href="javascript:void(0);" class="link-danger fs-15"><i class="ri-delete-bin-line" @click="remove(item.id)"></i></a>

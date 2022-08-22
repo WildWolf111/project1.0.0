@@ -17,14 +17,14 @@ class WarehouseDataService {
 
         }
         console.log(dataVals)
-        return axios.post('/api/v3/warehouses/list', config)
+        return axios.post('/api/v2/data/api/v3/warehouses/list', config)
     }
 
     get(id) {
         let config = {
             headers: authHeader()
         }
-        return axios.get(`/api/v3/warehouses/${id}`, config);
+        return axios.get(`/api/v2/data/api/v3/warehouses/${id}`, config);
     }
 
     create(data) {
@@ -32,29 +32,29 @@ class WarehouseDataService {
             headers: authHeader()
         }
         console.log(config)
-        return axios.post("/api/v3/warehouses", data, config);
+        return axios.post("/api/v2/data/api/v3/warehouses", data, config);
     }
 
     update(id, data) {
         let config = {
             headers: authHeader()
         }
-        return axios.put(`/api/v3/warehouses/${id}`, data, config);
+        return axios.put(`/api/v2/data/api/v3/warehouses/${id}`, data, config);
     }
 
     delete(id, data) {
         let config = {
             headers: authHeader()
         }
-        return axios.delete(`/api/v3/warehouses/delete/${id}`, data, config);
+        return axios.delete(`/api/v2/data/api/v3/warehouses/delete/${id}`, data, config);
     }
 
     deleteAll() {
-        return axios.delete(`/api/v3/warehouses`);
+        return axios.delete(`/api/v2/data/api/v3/warehouses`);
     }
 
     findByWarehouseName(name) {
-        return axios.post(`/api/v3/warehouses?name=${name}`, config);
+        return axios.post(`/api/v2/data/api/v3/warehouses?name=${name}`, config);
     }
 }
 

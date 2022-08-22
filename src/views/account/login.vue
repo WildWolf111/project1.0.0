@@ -62,7 +62,7 @@ export default {
       if (this.v$.$invalid) {
         return;
       } else {
-        console.log(login, password) 
+        
            const {login, password } = this;
           
           if (login && password) {

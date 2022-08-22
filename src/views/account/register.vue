@@ -36,9 +36,8 @@ export default {
         login: "",
         role:-1,
         password: "",
-        name: "",
-        surname:"",
-        middlename: "",
+        displayname: "",
+        
         email:"",
         password_check:""
       },
@@ -259,21 +258,32 @@ export default {
                                                       
                           
                           
+                       <div class="mb-2">
+                                                <label for="userpassword" class="form-label">Password Check <span class="text-danger">*</span></label>
+                                                <input type="password" class="form-control"   v-model="user.password"  :class="{
+                    'is-invalid': submitted && v$.user.password.$error,
+                  }" id="userpassword" placeholder="Enter password" required>
+                                                <div
+                  v-if="submitted && v$.user.password.$error"
+                  class="invalid-feedback"
+                >
+                  <span v-if="v$.user.password.required.$message">{{
+                    v$.user.password.required.$message
+                  }}</span>
+                </div>    
+                                            </div>
+
+
+
+
+
+
                           
                           <div class="mb-2">
-                              <label for="text" class="form-label">{{"t-Name"}} <span class="text-danger">*</span></label>
-                              <input type="text" class="form-control"   v-model="user.name" placeholder="Enter Name" >
+                              <label for="text" class="form-label">{{"t-DisplayName"}} <span class="text-danger">*</span></label>
+                              <input type="text" class="form-control"   v-model="user.displayname" placeholder="Enter Name" >
                           </div>
 
-                          <div class="mb-2">
-                              <label for="text" class="form-label">{{"t-MiddleName"}} <span class="text-danger">*</span></label>
-                              <input type="text" class="form-control"   v-model="user.midlename" placeholder="Enter MiddleName" >
-                          </div>
-
-                           <div class="mb-2">
-                              <label for="text" class="form-label">{{"t-SurName"}} <span class="text-danger">*</span></label>
-                              <input type="text" class="form-control"   v-model="user.surname" placeholder="Enter SurName" >
-                          </div>
 
                           
 
